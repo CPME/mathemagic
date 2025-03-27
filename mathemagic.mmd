@@ -1,0 +1,43 @@
+# Mathemagic - AI Calculator for STEM Problems
+
+## Overview
+Mathemagic is an AI-powered calculator that interprets and solves science, technology, engineering, and mathematics (STEM) problems. It converts natural language math problems into executable Python code, handling units with the Pint library.
+
+## Features
+- Convert natural language math problems to Python code
+- Handle units and unit conversions using Pint
+- Execute the generated Python code to solve problems
+- Access via MCP server or command-line interface
+
+## Usage
+
+### Server
+Start the MCP server:
+```bash
+python -m mathemagic.server
+```
+
+### Client
+Use the command-line interface:
+
+```bash
+# Solve a math problem
+python -m mathemagic.client --prompt "100 miles times 234 acres in liters"
+
+# Execute Python code directly
+python -m mathemagic.client --execute "print(Q_(100, 'mile') * Q_(234, 'acre'))"
+
+# Interactive mode
+python -m mathemagic.client
+```
+
+## Architecture
+- `mathemagic.py`: Core functionality for converting prompts and executing Python code
+- `server.py`: MCP server exposing the functionality
+- `client.py`: Command-line interface for interacting with the server
+
+## Dependencies
+- asyncio: For asynchronous operations
+- mcp: For server-client communication
+- pint: For handling units
+- python-dotenv: For environment variable management
