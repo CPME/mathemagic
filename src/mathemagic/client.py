@@ -2,7 +2,7 @@
 import asyncio
 import argparse
 import sys
-from mcp.client.fastmcp import Client
+from mcp.client import AsyncClient as Client
 
 async def main():
     parser = argparse.ArgumentParser(description="Mathemagic Calculator CLI")
