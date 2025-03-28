@@ -36,9 +36,55 @@ def prompt_to_py(user_prompt: str, ctx: Context) -> str:
     """
     ctx.info(f"Converting user prompt to Python: {user_prompt}")
     
-    # Use the sampling mechanism to convert the math problem to Python
-    full_prompt = f"{system_prompt}\n\nUser Problem: {user_prompt}\n\nPython Solution:"
-    return full_prompt
+    # In a real implementation, this would call an LLM API with the full prompt
+    # and extract the Python code from the response
+    
+    # For demonstration purposes, generate a simple Python solution based on the prompt
+    if "convert" in user_prompt.lower() and "miles" in user_prompt.lower():
+        python_code = """
+# Convert miles to kilometers
+miles = 100  # Example value, replace with actual input
+kilometers = miles * 1.60934
+
+# Store the result
+result = f"{miles} miles is equal to {kilometers:.2f} kilometers"
+"""
+    elif "add" in user_prompt.lower() or "sum" in user_prompt.lower():
+        python_code = """
+# Add two numbers
+a = 5  # Example value, replace with actual input
+b = 10  # Example value, replace with actual input
+
+# Calculate the sum
+result = a + b
+"""
+    elif "unit" in user_prompt.lower() or "measurement" in user_prompt.lower():
+        python_code = """
+# Handle unit conversion using Pint
+value = 100  # Example value, replace with actual input
+from_unit = 'meter'  # Example unit, replace with actual input
+to_unit = 'feet'  # Example unit, replace with actual input
+
+# Convert between units
+original = ureg.Quantity(value, from_unit)
+converted = original.to(to_unit)
+
+# Store the result
+result = f"{value} {from_unit} is equal to {converted:.2f} {to_unit}"
+"""
+    else:
+        # Default simple calculation
+        python_code = """
+# Perform a simple calculation
+import math
+
+# Example calculation
+x = 16
+result = math.sqrt(x)
+"""
+    
+    ctx.info(f"Generated Python code: {python_code}")
+    return python_code
 
 @mcp.tool()
 def execute_python(python_code: str, ctx: Context) -> str:
