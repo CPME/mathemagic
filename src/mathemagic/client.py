@@ -43,7 +43,7 @@ async def main():
     # Create server parameters for connecting to the MCP server
     server_params = StdioServerParameters(
         command="python",
-        args=["-m", "mathemagic.server"],
+        args=["src/mathemagic/server.py"],
     )
     
     try:
