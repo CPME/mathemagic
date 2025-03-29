@@ -3,7 +3,15 @@ import typer
 from typing import Optional
 import signal
 
-from . import mathemagic
+try:
+    # Try relative import first (for when used as a package)
+    from . import mathemagic
+except ImportError:
+    # Fall back to absolute import (for when run directly)
+    import sys
+    from pathlib import Path
+    sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+    from src.mathemagic import mathemagic
 
 app = typer.Typer(help="Mathemagic: AI calculator for science and engineering problems")
 
