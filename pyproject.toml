@@ -17,4 +17,4 @@ dependencies = [
 ]
 
 [project.scripts]
-mathemagic = "src.mathemagic.cli:app"
+mathemagic = "mathemagic.cli:app"

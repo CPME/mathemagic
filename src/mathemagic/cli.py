@@ -11,7 +11,7 @@ except ImportError:
     import sys
     from pathlib import Path
     sys.path.insert(0, str(Path(__file__).parent.parent.parent))
-    from src.mathemagic import mathemagic
+    from mathemagic import mathemagic
 
 app = typer.Typer(help="Mathemagic: AI calculator for science and engineering problems")
 
