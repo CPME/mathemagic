@@ -18,6 +18,10 @@ cd mathemagic
 
 # Install dependencies using UV
 uv pip install -e .
+
+# Set up environment variables
+# Create a .env file with your Anthropic API key:
+# ANTHROPIC_API_KEY=your_api_key_here
 ```
 
 ## Usage
@@ -33,10 +37,20 @@ python -m src.mathemagic.server
 
 ```bash
 # Run the CLI with a math problem
-python -m src.mathemagic.client "100 miles times 234 acres in liters"
+python -m src.mathemagic.cli "100 miles times 234 acres in liters"
+
+# Show the generated Python code along with the result
+python -m src.mathemagic.cli "100 miles times 234 acres in liters" --output-python
 
 # Or run in interactive mode
-python -m src.mathemagic.client
+python -m src.mathemagic.cli
+```
+
+### Generating UML Diagram
+
+```bash
+# Generate a UML diagram of the codebase
+python -m src.mathemagic.code_to_uml
 ```
 
 ## Examples
@@ -49,8 +63,9 @@ python -m src.mathemagic.client
 ## Architecture
 
 The application consists of:
-- A server component that handles the conversion of natural language to Python code
-- A client component that provides a command-line interface
-- Integration with the Pint library for unit handling
+- `mathemagic.py`: Core functionality for converting natural language to Python code and executing it
+- `server.py`: MCP server that provides API endpoints for the calculator
+- `cli.py`: Command-line interface for interacting with the calculator
+- `code_to_uml.py`: Utility for generating UML diagrams of the codebase
 
 See `mathemagic.mmd` for a visual representation of the architecture.
