@@ -10,9 +10,9 @@ import mathemagic
 load_dotenv()
 
 # Initialize MCP server
-mcp = MCP("Mathemagic")
+server = MCP("Mathemagic")
 
-@mcp.tool()
+@server.tool()
 def handle_prompt_to_py(user_prompt: str) -> Dict[str, Any]:
     """
     Convert a user prompt to Python code.
@@ -36,7 +36,7 @@ def handle_prompt_to_py(user_prompt: str) -> Dict[str, Any]:
             "error": str(e)
         }
 
-@mcp.tool()
+@server.tool()
 def handle_execute_python(python_code: str) -> Dict[str, Any]:
     """
     Execute Python code and return the result.
@@ -59,7 +59,7 @@ def handle_execute_python(python_code: str) -> Dict[str, Any]:
             "error": str(e)
         }
 
-@mcp.tool()
+@server.tool()
 def handle_calculate(user_prompt: str) -> Dict[str, Any]:
     """
     Process a complete calculation: convert prompt to Python and execute it.
@@ -93,6 +93,6 @@ def handle_calculate(user_prompt: str) -> Dict[str, Any]:
 if __name__ == "__main__":
     print("Starting Mathemagic MCP server...")
     try:
-        mcp.run()
+        server.run()
     except KeyboardInterrupt:
         print("\nMCP server shutdown complete.")
