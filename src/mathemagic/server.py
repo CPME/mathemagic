@@ -1,4 +1,6 @@
 import os
+import signal
+import sys
 from typing import Dict, Any
 
 from mcp.server.fastmcp import FastMCP
@@ -90,9 +92,23 @@ def handle_calculate(user_prompt: str) -> Dict[str, Any]:
             "error": str(e)
         }
 
+def shutdown_gracefully(signum, frame):
+    """Handle shutdown signals gracefully"""
+    print("\nShutting down FastMCP server...")
+    # Force exit after cleanup
+    sys.exit(0)
+
 if __name__ == "__main__":
     print("Starting Mathemagic FastMCP server...")
+    
+    # Set up signal handlers for graceful shutdown
+    signal.signal(signal.SIGINT, shutdown_gracefully)
+    signal.signal(signal.SIGTERM, shutdown_gracefully)
+    
     try:
         mcp.run()
     except KeyboardInterrupt:
         print("\nFastMCP server shutdown complete.")
+    except Exception as e:
+        print(f"\nError: {e}")
+        sys.exit(1)
