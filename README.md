@@ -42,20 +42,20 @@ uv pip install -e .
 ### Starting the Server
 ```bash
 # Start the MCP server
-python -m src.mathemagic.server
+uv run src/mathemagic/server.py
 ```
 
 ### Using the CLI
 
 ```bash
 # Run the CLI with a math problem
-python -m src.mathemagic.cli "100 miles times 234 acres in liters"
+uv run src/mathemagic/cli.py "100 miles times 234 acres in liters"
 
 # Show the generated Python code along with the result
-python -m src.mathemagic.cli "100 miles times 234 acres in liters" --output-python
+uv run src/mathemagic/cli.py "100 miles times 234 acres in liters" --output-python
 
 # Or run in interactive mode
-python -m src.mathemagic.cli
+uv run src/mathemagic/cli.py
 ```
 
 ### Output the Executed Python Code
