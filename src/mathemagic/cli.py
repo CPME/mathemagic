@@ -72,4 +72,4 @@ def process_problem(problem: str, output_python: bool):
         typer.echo(f"Error: {result}", err=True)
 
 if __name__ == "__main__":
-    app()
+    typer.app()
