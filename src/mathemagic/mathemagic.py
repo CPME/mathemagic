@@ -25,8 +25,14 @@ def load_system_prompt() -> str:
     current_dir = Path(__file__).parent
     system_instruction_path = current_dir / "system_instruction.md"
     
-    with open(system_instruction_path, "r") as file:
-        return file.read()
+    try:
+        with open(system_instruction_path, "r") as file:
+            return file.read()
+    except FileNotFoundError:
+        # Fallback to a basic system prompt if the file is not found
+        return """You are a helpful assistant that converts natural language math problems into Python code.
+Please solve the math problem by writing Python code. Use the Pint library for unit conversions.
+Return only the Python code without any explanations."""
 
 # Load system prompt once when module is imported
 SYSTEM_PROMPT = load_system_prompt()
