@@ -2,6 +2,19 @@
 
 An AI calculator agent that interprets and solves science, technology, mathematics, and engineering problems in Python.
 
+## Basic Usage
+```code
+mathemagic
+
+Mathemagic Calculator (Press Ctrl+C to exit)
+Enter your math problem:
+: Two hundred miles times 634 feet in meters squared.
+Processing: Two hundred miles times 634 feet in meters squared.
+
+Result:
+62198956.89216 meter ** 2
+```
+
 ## Features
 
 - Converts natural language math problems to Python code
@@ -27,7 +40,6 @@ uv pip install -e .
 ## Usage
 
 ### Starting the Server
-
 ```bash
 # Start the MCP server
 python -m src.mathemagic.server
@@ -46,12 +58,38 @@ python -m src.mathemagic.cli "100 miles times 234 acres in liters" --output-pyth
 python -m src.mathemagic.cli
 ```
 
-### Generating UML Diagram
+### Output the Executed Python Code
+Using the -p or --output-python flags
+````code
+mathemagic -p
 
-```bash
-# Generate a UML diagram of the codebase
-python -m src.mathemagic.code_to_uml
+Mathemagic Calculator (Press Ctrl+C to exit)
+Enter your math problem:
+: Two hundred miles times 634 feet in meters squared.
+Processing: Two hundred miles times 634 feet in meters squared.
+
+Generated Python code:
+```python
+from pint import UnitRegistry
+
+ureg = UnitRegistry()
+Q_ = ureg.Quantity
+
+# Define the variables with their respective units
+miles = Q_(200, 'mile')  # distance in miles
+feet = Q_(634, 'foot')  # distance in feet
+
+# Perform the multiplication
+result = miles * feet
+
+# Convert the result to meters squared
+result_m2 = result.to('meter**2')
+
+print(result_m2)
 ```
+Result:
+62198956.89216 meter ** 2
+````
 
 ## Examples
 
@@ -66,6 +104,3 @@ The application consists of:
 - `mathemagic.py`: Core functionality for converting natural language to Python code and executing it
 - `server.py`: MCP server that provides API endpoints for the calculator
 - `cli.py`: Command-line interface for interacting with the calculator
-- `code_to_uml.py`: Utility for generating UML diagrams of the codebase
-
-See `mathemagic.mmd` for a visual representation of the architecture.
