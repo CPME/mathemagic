@@ -15,7 +15,11 @@ except ImportError:
     # Import the module directly
     from mathemagic import mathemagic
 
+# Create a Typer app for compatibility with entry points
+app = typer.Typer(help="Mathemagic: AI calculator for science and engineering problems")
 
+
+@app.command()
 def main(
     problem: Optional[str] = typer.Argument(None, help="Math problem to solve"),
     output_python: bool = typer.Option(False, "--output-python", "-p", help="Output the generated Python code")
@@ -73,4 +77,4 @@ def process_problem(problem: str, output_python: bool):
 
 
 if __name__ == "__main__":
-    typer.run(main)
+    app()
