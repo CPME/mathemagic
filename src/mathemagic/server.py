@@ -97,7 +97,7 @@ async def main():
     
     # Handle graceful shutdown
     try:
-        await server.run_async()
+        await server.run_sse_async()
     except KeyboardInterrupt:
         print("\nShutting down Mathemagic MCP server...")
 
