@@ -2,7 +2,7 @@ import os
 import asyncio
 from typing import Dict, Any
 
-from fastmcp import MCPServer
+from mcp.server.fastmcp import FastMCP
 from dotenv import load_dotenv
 
 from . import mathemagic
@@ -11,9 +11,9 @@ from . import mathemagic
 load_dotenv()
 
 # Initialize MCP server
-server = MCPServer()
+server = FastMCP("Mathemagic")
 
-@server.register("prompt_to_py")
+@server.tool()
 async def handle_prompt_to_py(user_prompt: str) -> Dict[str, Any]:
     """
     Convert a user prompt to Python code.
@@ -37,7 +37,7 @@ async def handle_prompt_to_py(user_prompt: str) -> Dict[str, Any]:
             "error": str(e)
         }
 
-@server.register("execute_python")
+@server.tool()
 async def handle_execute_python(python_code: str) -> Dict[str, Any]:
     """
     Execute Python code and return the result.
@@ -60,7 +60,7 @@ async def handle_execute_python(python_code: str) -> Dict[str, Any]:
             "error": str(e)
         }
 
-@server.register("calculate")
+@server.tool()
 async def handle_calculate(user_prompt: str) -> Dict[str, Any]:
     """
     Process a complete calculation: convert prompt to Python and execute it.
@@ -97,11 +97,9 @@ async def main():
     
     # Handle graceful shutdown
     try:
-        await server.start()
+        await server.run_async()
     except KeyboardInterrupt:
         print("\nShutting down Mathemagic MCP server...")
-    finally:
-        await server.stop()
 
 if __name__ == "__main__":
     try:
