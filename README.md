@@ -1,8 +1,7 @@
 # Mathemagic
 An AI calculator agent that interprets and solves science, technology, mathematics, and engineering problems in Python.
-Mathemagic uses pin 
 
-<img src="./resources/mathemagic.png" alt="Mathemagic" width="500"/>
+<img src="./resources/mathemagic.png" alt="Mathemagic" width="420"/>
 
 ## Features
 - Converts natural language math problems to Python code using LLMs (Claude is currently the only supported model)
@@ -127,10 +126,10 @@ The application consists of:
 
 # TODO
 1. Clean up python output through server (currently outputs in a dict and not pretty)
-1. 
-1. Update to use openrouter
+1. Improve CLI (make it pretty)
 1. Add symbolic math support
 1. Add linear algebra support
+1. Update to use openrouter
 1. Add tests
 1. Astropy support?
 1. Auth as alternative to .env for remote use?
