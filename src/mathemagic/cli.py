@@ -10,7 +10,9 @@ except ImportError:
     # Fall back to absolute import (for when run directly)
     import sys
     from pathlib import Path
-    sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+    # Add the src directory to the path
+    sys.path.insert(0, str(Path(__file__).parent.parent))
+    # Import the module directly
     from mathemagic import mathemagic
 
 
