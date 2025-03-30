@@ -1,5 +1,5 @@
 [project]
-name = "mathemagic"
+name = "mathemagic-ai"
 version = "0.1.0"
 description = "AI Calculator Agent"
 readme = "README.md"
