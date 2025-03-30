@@ -1,7 +1,7 @@
 import os
 from typing import Dict, Any
 
-from mcp import MCP
+from mcp.server.fastmcp import FastMCP
 from dotenv import load_dotenv
 
 import mathemagic
@@ -9,10 +9,10 @@ import mathemagic
 # Load environment variables
 load_dotenv()
 
-# Initialize MCP server
-server = MCP("Mathemagic")
+# Initialize FastMCP server
+mcp = FastMCP("Mathemagic")
 
-@server.tool()
+@mcp.tool()
 def handle_prompt_to_py(user_prompt: str) -> Dict[str, Any]:
     """
     Convert a user prompt to Python code.
@@ -36,7 +36,7 @@ def handle_prompt_to_py(user_prompt: str) -> Dict[str, Any]:
             "error": str(e)
         }
 
-@server.tool()
+@mcp.tool()
 def handle_execute_python(python_code: str) -> Dict[str, Any]:
     """
     Execute Python code and return the result.
@@ -59,7 +59,7 @@ def handle_execute_python(python_code: str) -> Dict[str, Any]:
             "error": str(e)
         }
 
-@server.tool()
+@mcp.tool()
 def handle_calculate(user_prompt: str) -> Dict[str, Any]:
     """
     Process a complete calculation: convert prompt to Python and execute it.
@@ -91,8 +91,8 @@ def handle_calculate(user_prompt: str) -> Dict[str, Any]:
         }
 
 if __name__ == "__main__":
-    print("Starting Mathemagic MCP server...")
+    print("Starting Mathemagic FastMCP server...")
     try:
-        server.run()
+        mcp.run()
     except KeyboardInterrupt:
-        print("\nMCP server shutdown complete.")
+        print("\nFastMCP server shutdown complete.")
