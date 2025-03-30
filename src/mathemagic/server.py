@@ -1,8 +1,7 @@
 import os
-import asyncio
 from typing import Dict, Any
 
-from mcp.server.fastmcp import FastMCP
+from mcp import MCP
 from dotenv import load_dotenv
 
 import mathemagic
@@ -11,10 +10,10 @@ import mathemagic
 load_dotenv()
 
 # Initialize MCP server
-server = FastMCP("Mathemagic")
+mcp = MCP("Mathemagic")
 
-@server.tool()
-async def handle_prompt_to_py(user_prompt: str) -> Dict[str, Any]:
+@mcp.tool()
+def handle_prompt_to_py(user_prompt: str) -> Dict[str, Any]:
     """
     Convert a user prompt to Python code.
     
@@ -37,8 +36,8 @@ async def handle_prompt_to_py(user_prompt: str) -> Dict[str, Any]:
             "error": str(e)
         }
 
-@server.tool()
-async def handle_execute_python(python_code: str) -> Dict[str, Any]:
+@mcp.tool()
+def handle_execute_python(python_code: str) -> Dict[str, Any]:
     """
     Execute Python code and return the result.
     
@@ -60,8 +59,8 @@ async def handle_execute_python(python_code: str) -> Dict[str, Any]:
             "error": str(e)
         }
 
-@server.tool()
-async def handle_calculate(user_prompt: str) -> Dict[str, Any]:
+@mcp.tool()
+def handle_calculate(user_prompt: str) -> Dict[str, Any]:
     """
     Process a complete calculation: convert prompt to Python and execute it.
     
@@ -91,18 +90,9 @@ async def handle_calculate(user_prompt: str) -> Dict[str, Any]:
             "error": str(e)
         }
 
-async def main():
-    """Start the MCP server"""
-    print("Starting Mathemagic MCP server...")
-    
-    # Handle graceful shutdown
-    try:
-        await server.run_sse_async()
-    except KeyboardInterrupt:
-        print("\nShutting down Mathemagic MCP server...")
-
 if __name__ == "__main__":
+    print("Starting Mathemagic MCP server...")
     try:
-        asyncio.run(main())
+        mcp.run()
     except KeyboardInterrupt:
         print("\nMCP server shutdown complete.")
