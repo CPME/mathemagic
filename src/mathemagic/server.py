@@ -5,7 +5,7 @@ from typing import Dict, Any
 from mcp.server.fastmcp import FastMCP
 from dotenv import load_dotenv
 
-from mathemagic import mathemagic
+import mathemagic
 
 # Load environment variables
 load_dotenv()
