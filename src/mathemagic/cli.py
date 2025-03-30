@@ -13,15 +13,8 @@ except ImportError:
     sys.path.insert(0, str(Path(__file__).parent.parent.parent))
     from mathemagic import mathemagic
 
-app = typer.Typer(help="Mathemagic: AI calculator for science and engineering problems")
 
-def signal_handler(sig, frame):
-    """Handle Ctrl+C gracefully"""
-    print("\nExiting Mathemagic. Goodbye!")
-    sys.exit(0)
-
-@app.command()
-def calculate(
+def main(
     problem: Optional[str] = typer.Argument(None, help="Math problem to solve"),
     output_python: bool = typer.Option(False, "--output-python", "-p", help="Output the generated Python code")
 ):
@@ -30,7 +23,11 @@ def calculate(
     
     If no problem is provided, enters interactive mode.
     """
-    # Register signal handler for Ctrl+C
+    # Handle Ctrl+C gracefully
+    def signal_handler(sig, frame):
+        print("\nExiting Mathemagic. Goodbye!")
+        sys.exit(0)
+        
     signal.signal(signal.SIGINT, signal_handler)
     
     if problem:
@@ -48,6 +45,7 @@ def calculate(
             except KeyboardInterrupt:
                 typer.echo("\nExiting Mathemagic. Goodbye!")
                 sys.exit(0)
+
 
 def process_problem(problem: str, output_python: bool):
     """Process a single math problem"""
@@ -71,5 +69,6 @@ def process_problem(problem: str, output_python: bool):
     else:
         typer.echo(f"Error: {result}", err=True)
 
+
 if __name__ == "__main__":
-    typer.app()
+    typer.run(main)
