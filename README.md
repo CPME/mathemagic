@@ -1,6 +1,9 @@
 # Mathemagic
 An AI calculator agent that interprets and solves science, technology, mathematics, and engineering problems in Python.
 
+- [Source Code](https://github.com/CPME/mathemagic)
+- [pypi](https://pypi.org/project/mathemagic-ai/)
+
 <img src="./resources/mathemagic.png" alt="Mathemagic" width="420"/>
 
 ## Features
@@ -9,7 +12,7 @@ An AI calculator agent that interprets and solves science, technology, mathemati
 - Provides access through MCP and CLI interfaces
 - Supports complex mathematical operations with proper unit handling
 
-## Examples
+## Example Inputs
 - "Convert 100 kilometers per hour to miles per hour"
 - "What is the volume of a cylinder with radius 5cm and height 10cm?"
 - "If I have 3 apples and 4 oranges, how many pieces of fruit do I have?"
@@ -31,7 +34,55 @@ Result:
 62198956.89216 meter ** 2
 ```
 
-## Installation
+## Quickstart
+### Installing Mathemagic
+If you already installed uv, activated a virtual environment, and created a `.env` file with your Anthropic API key installation is simple:
+```bash
+uv add mathemagic-ai
+``` 
+If not, please see "Detailed Setup" for more info.
+
+## Detailed Setup
+### Creating an Anthropic Account
+You'll also need an anthropic API key. This requires you set up a developer console, and add payment information. Running commands costs pennies.
+
+To set up an account and get an API key:
+1. Set up an account for the [Anthropic Console](https://console.anthropic.com/login?returnTo=%2F%3F)
+1. Add billing details
+1. Buy credits (you can use the minumum)
+1. Create an API key
+
+*I may add support for other model providers in the future
+
+### Setting up API key as an Environment Variable
+Create a `.env` file with your Anthropic API key in your project root directory. 
+
+If you already have a `.env` file, this command adds the api key.
+```bash
+echo "ANTHROPIC_API_KEY=your_api_key_here" >> .env
+```
+
+### Installing uv & Setting Up a Virtual Environment
+You can use pip if you prefer, but I highly recommend uv.
+
+If you need to install uv, this is the basic command to install it on macOS and Linux. If it doesn't work, troubleshoot with instructions listed at [installing uv](https://docs.astral.sh/uv/getting-started/installation/#pypi).
+
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
+I also higly recommend setting up a virtual environment.
+```bash
+# Create a virtual environment
+uv venv
+# Activate the virtual environment
+source .venv/bin/activate
+# Initialize the project with a pyproject.toml
+uv init
+```
+
+## Installation from Source (more advanced)
+This is currently the only supported method for using the MCP server.
 
 ```bash
 # Clone the repository
@@ -42,12 +93,8 @@ cd mathemagic
 uv pip install -e .
 
 ```
-Set up environment variables. Create a `.env` file with your Anthropic API key in the project root directory.
-```bash
-echo "ANTHROPIC_API_KEY=your_api_key_here" >> .env
-```
-## Usage
-### Using the CLI
+## Detailed CLI Usage
+### Example Usages
 ```bash
 # Run in interactive mode
 mathemagic
@@ -62,7 +109,7 @@ mathemagic "100 miles times 234 acres in liters" --output-python
 mathemagic --help
 ```
 
-#### Output the Executed Python Code
+### Output the Executed Python Code
 Using the -p or --output-python flags
 ```bash
 mathemagic -p
@@ -125,8 +172,10 @@ The application consists of:
 - `cli.py`: Command-line interface for interacting with the calculator
 
 # TODO
+1. Support for running MCP server with mathemagic installed as a package from pypi
 1. Clean up python output through server (currently outputs in a dict and not pretty)
 1. Improve CLI (make it pretty)
+1. Update spec.md?
 1. Add symbolic math support
 1. Add linear algebra support
 1. Update to use openrouter
