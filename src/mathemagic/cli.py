@@ -38,7 +38,9 @@ def main(
     """
     # Handle Ctrl+C gracefully
     def signal_handler(sig, frame):
-        console.print("\n[italic]Exiting Mathemagic. Goodbye![/italic]")
+        # Print a newline to avoid showing ^C
+        print("", end="\r")
+        console.print("[italic]Exiting Mathemagic. Goodbye![/italic]")
         sys.exit(0)
         
     signal.signal(signal.SIGINT, signal_handler)
@@ -51,15 +53,17 @@ def main(
         content = Text("AI-powered calculator for science and engineering problems\nPress Ctrl+C to exit", style="italic")
         panel = Panel(content, title=title, border_style="blue", padding=(1, 2))
         console.print(panel)
-        console.print("Enter your math problem:")
+        console.print("Enter your math problem -")
         
         while True:
             try:
                 problem = typer.prompt("")
                 process_problem(problem, output_python)
-                console.print("\nEnter another problem:")
+                console.print("\nEnter another problem -")
             except KeyboardInterrupt:
-                console.print("\n[italic]Exiting Mathemagic. Goodbye![/italic]")
+                # Print a newline to avoid showing ^C
+                print("", end="\r")
+                console.print("[italic]Exiting Mathemagic. Goodbye![/italic]")
                 sys.exit(0)
 
 
