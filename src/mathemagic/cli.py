@@ -4,6 +4,8 @@ from typing import Optional
 import signal
 from rich.console import Console
 from rich.markdown import Markdown
+from rich.panel import Panel
+from rich.text import Text
 
 try:
     # Try relative import first (for when used as a package)
@@ -45,7 +47,10 @@ def main(
         process_problem(problem, output_python)
     else:
         # Interactive mode
-        console.print("[bold blue]Mathemagic Calculator[/bold blue] (Press Ctrl+C to exit)")
+        title = Text("✨ Mathemagic Calculator ✨", style="bold blue")
+        content = Text("AI-powered calculator for science and engineering problems\nPress Ctrl+C to exit", style="italic")
+        panel = Panel(content, title=title, border_style="blue", padding=(1, 2))
+        console.print(panel)
         console.print("Enter your math problem:")
         
         while True:
