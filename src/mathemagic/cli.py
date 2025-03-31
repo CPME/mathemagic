@@ -83,13 +83,25 @@ def process_problem(problem: str, output_python: bool):
     # Execute the Python code
     result, success = mathemagic.execute_py(python_code)
     
-    # Display result
-    console.print("\n[bold]Result:[/bold]")
+    # Display result in a panel with matching blue styling
     if success:
         # Try to render the result as markdown
-        console.print(Markdown(str(result)))
+        result_content = Markdown(str(result))
+        result_panel = Panel(
+            result_content,
+            title="[bold]Result[/bold]",
+            border_style="blue",
+            padding=(1, 2)
+        )
+        console.print("\n", result_panel)
     else:
-        console.print(f"[bold red]Error:[/bold red] {result}")
+        error_panel = Panel(
+            f"[bold red]{result}[/bold red]",
+            title="[bold red]Error[/bold red]",
+            border_style="red",
+            padding=(1, 2)
+        )
+        console.print("\n", error_panel)
 
 
 if __name__ == "__main__":
