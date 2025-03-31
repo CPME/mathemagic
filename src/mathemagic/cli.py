@@ -57,7 +57,7 @@ def main(
         
         while True:
             try:
-                problem = typer.prompt("")
+                problem = typer.prompt(" ")
                 process_problem(problem, output_python)
                 console.print("\nEnter another problem -")
             except KeyboardInterrupt:
