@@ -2,6 +2,8 @@ import sys
 import typer
 from typing import Optional
 import signal
+from rich.console import Console
+from rich.markdown import Markdown
 
 try:
     # Try relative import first (for when used as a package)
@@ -18,6 +20,9 @@ except ImportError:
 # Create a Typer app for compatibility with entry points
 app = typer.Typer(help="Mathemagic: AI calculator for science and engineering problems")
 
+# Create a Rich console for pretty output
+console = Console()
+
 
 @app.command()
 def main(
@@ -31,7 +36,7 @@ def main(
     """
     # Handle Ctrl+C gracefully
     def signal_handler(sig, frame):
-        print("\nExiting Mathemagic. Goodbye!")
+        console.print("\n[italic]Exiting Mathemagic. Goodbye![/italic]")
         sys.exit(0)
         
     signal.signal(signal.SIGINT, signal_handler)
@@ -40,40 +45,42 @@ def main(
         process_problem(problem, output_python)
     else:
         # Interactive mode
-        typer.echo("Mathemagic Calculator (Press Ctrl+C to exit)")
-        typer.echo("Enter your math problem:")
+        console.print("[bold blue]Mathemagic Calculator[/bold blue] (Press Ctrl+C to exit)")
+        console.print("Enter your math problem:")
         
         while True:
             try:
                 problem = typer.prompt("")
                 process_problem(problem, output_python)
-                typer.echo("\nEnter another problem:")
+                console.print("\nEnter another problem:")
             except KeyboardInterrupt:
-                typer.echo("\nExiting Mathemagic. Goodbye!")
+                console.print("\n[italic]Exiting Mathemagic. Goodbye![/italic]")
                 sys.exit(0)
 
 
 def process_problem(problem: str, output_python: bool):
     """Process a single math problem"""
-    typer.echo(f"Processing: {problem}")
+    console.print(f"[bold]Processing:[/bold] {problem}")
     
     # Convert problem to Python
     python_code = mathemagic.prompt_to_py(problem)
     
     # Show Python code if requested
     if output_python:
-        typer.echo("\nGenerated Python code:")
-        typer.echo(f"```python\n{mathemagic.extract_python_code(python_code)}\n```")
+        console.print("\n[bold]Generated Python code:[/bold]")
+        code_block = f"```python\n{mathemagic.extract_python_code(python_code)}\n```"
+        console.print(Markdown(code_block))
     
     # Execute the Python code
     result, success = mathemagic.execute_py(python_code)
     
     # Display result
-    typer.echo("\nResult:")
+    console.print("\n[bold]Result:[/bold]")
     if success:
-        typer.echo(result)
+        # Try to render the result as markdown
+        console.print(Markdown(str(result)))
     else:
-        typer.echo(f"Error: {result}", err=True)
+        console.print(f"[bold red]Error:[/bold red] {result}")
 
 
 if __name__ == "__main__":
