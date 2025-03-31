@@ -53,13 +53,13 @@ def main(
         content = Text("AI-powered calculator for science and engineering problems\nPress Ctrl+C to exit", style="italic")
         panel = Panel(content, title=title, border_style="blue", padding=(1, 2))
         console.print(panel)
-        console.print("Enter your math problem -")
+        console.print("Enter your math problem")
         
         while True:
             try:
                 problem = typer.prompt(" ")
                 process_problem(problem, output_python)
-                console.print("\nEnter another problem -")
+                console.print("\nEnter another problem")
             except KeyboardInterrupt:
                 # Print a newline to avoid showing ^C
                 print("", end="\r")
