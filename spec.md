@@ -1,6 +1,9 @@
 # Specification Template
 > Ingest the information from this file, implement the Low-Level Tasks, and generate the code that will satisfy the High and Mid-Level Objectives.
 
+```python
+13685760000.000002 inch ** 2
+```
 ## High-Level Objective
 
 - Build a ai calculator agent to interperet and solve science, technology, mathematics, and engineering problems in python
