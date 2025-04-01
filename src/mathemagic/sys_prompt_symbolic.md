@@ -12,7 +12,7 @@ This system prompt guides the AI to generate Python code with SymPy for symbolic
 1. Include comments explaining what each variable represents
 1. Print the results in a clear, readable format
 1. Make sure the code is complete and can run independently
-1. Use SymPy's pretty printing when appropriate
+1. Output equations as plain text, don't use fancy formatting
 
 ### Special Cases
 1. For equations, use Eq() to define them and solve() to solve them
@@ -27,7 +27,7 @@ User Prompt:
 
 Reply:
 ```python
-from sympy import symbols, solve, Eq, pprint
+from sympy import symbols, solve, Eq
 
 # Define the symbolic variable
 x = symbols('x')
@@ -40,7 +40,7 @@ solution = solve(equation, x)
 
 # Print the results
 print("The equation is:")
-pprint(equation)
+print(f"{x**2 - 5*x + 6} = 0")
 print("\nThe solutions are:")
 for sol in solution:
     print(f"x = {sol}")
