@@ -80,19 +80,6 @@ source .venv/bin/activate
 # Initialize the project with a pyproject.toml
 uv init
 ```
-
-## Installation from Source (more advanced)
-This is currently the only supported method for using the MCP server.
-
-```bash
-# Clone the repository
-git clone https://github.com/yourusername/mathemagic.git
-cd mathemagic
-
-# Install dependencies using UV
-uv pip install -e .
-
-```
 ## Detailed CLI Usage
 ### Example Usages
 ```bash
@@ -108,7 +95,6 @@ mathemagic "100 miles times 234 acres in liters" --output-python
 # help menu
 mathemagic --help
 ```
-
 ### Output the Executed Python Code
 Using the -p or --output-python flags
 ```bash
@@ -142,7 +128,6 @@ print(result_m2)
 Result:
 62198956.89216 meter ** 2
 ````
-
 #### Handles Arbitrary Units
 mathemagic uses Pint to handle units.
 ```code
@@ -153,7 +138,19 @@ Processing: 100 bananas times 66 guavas
 Result:
 6600 banana * guava
 ```
-### Using the MCP Server
+
+## Installation from Source (more advanced)
+This is currently the only supported method for using the MCP server.
+
+It's also advisable to do this from a virtual environment.
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/mathemagic.git
+cd mathemagic
+
+# Install dependencies using UV
+uv pip install -e .
+```
 #### Starting the Server
 ```bash
 # Start the MCP server
