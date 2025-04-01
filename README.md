@@ -25,7 +25,7 @@ mathemagic
 ```
 CLI initializes, and you type in your math problem
 
-<img src="./resources/cli_screenshot.png" alt="Mathemagic" width="800"/>
+<img src="./resources/cli_screenshot.png" alt="cli" width="800"/>
 
 ## Quickstart
 ### Installing Mathemagic
