@@ -24,15 +24,8 @@ Enter command to start CLI
 mathemagic
 ```
 CLI initializes, and you type in your math problem
-```code
-Mathemagic Calculator (Press Ctrl+C to exit)
-Enter your math problem:
-: Two hundred miles times 634 feet in meters squared.
-Processing: Two hundred miles times 634 feet in meters squared.
 
-Result:
-62198956.89216 meter ** 2
-```
+<img src="./resources/cli_screenshot.png" alt="Mathemagic" width="800"/>
 
 ## Quickstart
 ### Installing Mathemagic
